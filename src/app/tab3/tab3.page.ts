@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -11,11 +11,14 @@ export class Tab3Page implements OnInit {
   public tab3: string;
   public formData: FormGroup;
   public items = [
+   
     
    
   ];
   constructor(private activatedRoute: ActivatedRoute, 
-              private alertCtrl:AlertController) {}
+              private alertCtrl:AlertController,
+              private router: Router,
+              private navCtrl: NavController) {}
 
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class Tab3Page implements OnInit {
       Phone: new FormControl()
     }); 
     
-
+  
   }
   onSubmit() {
     this.items.push(this.formData.value);
@@ -34,7 +37,7 @@ export class Tab3Page implements OnInit {
     this.formData.reset();
     
       };
-  
+
   
     async alertThis(index: number): Promise<void>{
       await this.alertCtrl.create({
@@ -54,6 +57,9 @@ export class Tab3Page implements OnInit {
         ]
   
       }).then (res=> res.present());
+    }
+    navigateToMessage() {
+      this.navCtrl.navigateForward(['message']);
     }
 
 }  
